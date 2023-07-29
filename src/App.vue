@@ -1,28 +1,7 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue';
 import Card from './components/Card.vue';
-let images = reactive([]);
-const isLoading = ref(true);
-const getImages = async () => {
-  try {
-    const response = await fetch('https://fed-team.modyo.cloud/api/content/spaces/animals/types/game/entries?per_page=20')
-    const { entries } = await response.json()
-    // images = fields;
-    entries.forEach(element => {
-      if (images.length <= 9) {
-        images.push(element.fields.image.url)
-      }
-    })
-    isLoading.value = false;
-
-  } catch (error) {
-    alert(error)
-    isLoading.value = true;
-  }
-}
-onMounted(() => {
-  getImages()
-})
+import { useAnimalImages } from './composables/animalImages';
+const { images, isLoading, isError } = useAnimalImages()
 </script>
 
 <template>
@@ -40,10 +19,13 @@ onMounted(() => {
       <template v-if="isLoading">
         <img src="https://i.gifer.com/ZKZg.gif" alt="">
       </template>
-      <div v-else class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-2 xl:gap-5">
+      <div v-if="!isLoading && !isError" class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-2 xl:gap-5">
         <template v-for="image in images" :key="image">
           <Card :image="image"></Card>
         </template>
+      </div>
+      <div v-if="isError">
+          <h1>An error occurs. Please try later.</h1>
       </div>
     </div>
   </div>
