@@ -18,13 +18,13 @@ I have deployed this game in netlify so everybody can give a try.
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/NeftaliAguilarDev/memory-game-vue.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd memory-game
+  cd memory-game-vue
 ```
 
 Install dependencies
