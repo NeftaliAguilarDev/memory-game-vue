@@ -1,6 +1,7 @@
 import { reactive, ref } from 'vue'
-export const urlAPI = 'https://fed-team.modyo.cloud/api/content/spaces/animals/types/game/entries?per_page=20'
 export function useAnimalImages () {
+  const urlAPI =
+    'https://fed-team.modyo.cloud/api/content/spaces/animals/types/game/entries?per_page=20'
   const NUMBER_OF_PAIRS = 9
   const images = reactive([])
   const isLoading = ref(true)
@@ -26,9 +27,11 @@ export function useAnimalImages () {
   getImages()
 
   return {
+    getImages,
+    urlAPI,
     images,
-    isLoading,
     isError,
+    isLoading,
     NUMBER_OF_PAIRS
   }
 }

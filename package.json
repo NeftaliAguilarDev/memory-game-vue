@@ -9,7 +9,7 @@
         "preview": "vite preview",
         "eslint": "eslint .",
         "eslint-fix": "eslint . --fix",
-        "test": "yarn jest"
+        "test": "vitest"
     },
     "dependencies": {
         "vue": "^3.3.4"
