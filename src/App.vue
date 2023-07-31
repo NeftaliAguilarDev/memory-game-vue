@@ -38,15 +38,13 @@ const saveUsername = (event) => {
             <CardImage @click="flipCard($event)" :image="image" class="cards"></CardImage>
           </template>
         </div>
-        <div v-if="gameOver" class="w-full p-10 text-center">
+        <div v-if="gameOver" class="w-full p-10 text-center relative top-44 sm:top-0">
           <h2 class="text-2xl lg:text-5xl font-bold text-green-modyo mb-5">Game Over</h2>
           <h3 class="text-xl lg:text-3xl font-bold text-black">Congratulations {{ userName }}</h3>
-          <button @click="playAgain" class="border rounded-md px-5 py-2 mt-5 bg-green-modyo text-white">Play
-            again</button>
         </div>
 
       </template>
-      <div v-if="isError" class="w-full p-10 text-center">
+      <div v-if="isError" class="w-full p-10 text-center relative top-44 sm:top-0">
         <img class="w-20 mx-auto" src="https://freepngimg.com/thumb/sad_emoji/36860-2-sad-emoji-transparent-image.png"
           alt="">
         <span class="text-2xl lg:text-5xl font-bold text-green-modyo mb-5">An error occurs. Please try later.</span>
