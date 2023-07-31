@@ -1,8 +1,8 @@
-<script setup lang="ts">
-import Card from './components/Card.vue';
+<script setup>
+import CardImage from './components/CardImage.vue'
 import HeaderBoard from './components/HeaderBoard.vue'
-import { useAnimalImages } from './composables/animalImages';
-import { flipCard, board, startGame, isGameStarted, userName, gameOver, playAgain } from './helpers/cardGame'
+import { useAnimalImages } from './composables/animalImages'
+import { flipCard, board, startGame, isGameStarted, userName, gameOver, playAgain } from './utils/cardGame'
 const { images, isLoading, isError } = useAnimalImages()
 startGame()
 const saveUsername = (event) => {
@@ -35,7 +35,7 @@ const saveUsername = (event) => {
         <div v-show="!gameOver"
           class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 xl:gap-5 mt-10 pb-10 relative top-44 sm:top-0">
           <template v-for="(image) in images" :key="image">
-            <Card @click="flipCard($event)" :image="image" class="cards"></Card>
+            <CardImage @click="flipCard($event)" :image="image" class="cards"></CardImage>
           </template>
         </div>
         <div v-if="gameOver" class="w-full p-10 text-center">
@@ -55,4 +55,4 @@ const saveUsername = (event) => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped></style>./utils/flipCard
