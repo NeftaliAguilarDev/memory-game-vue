@@ -2,7 +2,7 @@
 import Card from './components/Card.vue';
 import HeaderBoard from './components/HeaderBoard.vue'
 import { useAnimalImages } from './composables/animalImages';
-import { flipCard, board, startGame, isGameStarted } from './helpers/cardGame'
+import { flipCard, board, startGame, isGameStarted, userName, gameOver, playAgain } from './helpers/cardGame'
 const { images, isLoading, isError } = useAnimalImages()
 startGame()
 const saveUsername = (event) => {
@@ -32,15 +32,24 @@ const saveUsername = (event) => {
       </template>
       <template v-if="!isLoading && isGameStarted && !isError" class="">
         <HeaderBoard :board="board" />
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 xl:gap-5 mt-10">
+        <div v-show="!gameOver"
+          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 xl:gap-5 mt-10 pb-10 relative top-44 sm:top-0">
           <template v-for="(image) in images" :key="image">
             <Card @click="flipCard($event)" :image="image" class="cards"></Card>
           </template>
         </div>
+        <div v-if="gameOver" class="w-full p-10 text-center">
+          <h2 class="text-2xl lg:text-5xl font-bold text-green-modyo mb-5">Game Over</h2>
+          <h3 class="text-xl lg:text-3xl font-bold text-black">Congratulations {{ userName }}</h3>
+          <button @click="playAgain" class="border rounded-md px-5 py-2 mt-5 bg-green-modyo text-white">Play
+            again</button>
+        </div>
 
       </template>
-      <div v-if="isError">
-        <h1>An error occurs. Please try later.</h1>
+      <div v-if="isError" class="w-full p-10 text-center">
+        <img class="w-20 mx-auto" src="https://freepngimg.com/thumb/sad_emoji/36860-2-sad-emoji-transparent-image.png"
+          alt="">
+        <span class="text-2xl lg:text-5xl font-bold text-green-modyo mb-5">An error occurs. Please try later.</span>
       </div>
     </div>
   </div>

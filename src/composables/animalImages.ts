@@ -18,11 +18,12 @@ export function useAnimalImages () {
       })
       // Duplicate de images inserted
       images.push(...images)
-      isLoading.value = false
+      // Shuffle imaege order
+      images.sort(() => Math.random() - 0.5)
     } catch (error) {
       isError.value = true
-      isLoading.value = false
     }
+    isLoading.value = false
   }
   getImages()
 

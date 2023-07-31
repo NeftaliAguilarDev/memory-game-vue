@@ -19,7 +19,4 @@ const imageName = props.image?.split('/').pop()
 .open > img:first-child {
     @apply z-[-1] top-[100%]
 }
-.open-temporarily > img:first-child {
-    @apply z-[-1]
-}
 </style>

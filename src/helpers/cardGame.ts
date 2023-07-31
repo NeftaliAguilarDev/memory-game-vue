@@ -2,6 +2,7 @@ import { reactive, ref } from 'vue'
 import { useAnimalImages } from '../composables/animalImages'
 const { NUMBER_OF_PAIRS } = useAnimalImages()
 const isGameStarted = ref(false)
+const gameOver = ref(false)
 const board = reactive({
   errors: 0,
   movements: 0,
@@ -13,8 +14,9 @@ const openCards = reactive({
   cardOne: { element: '', name: '' },
   cardTwo: { element: '', name: '' }
 })
+let userName = localStorage.getItem('username')
 const startGame = () => {
-  const userName = localStorage.getItem('username')
+  userName = localStorage.getItem('username')
   if (userName) {
     isGameStarted.value = true
     intervalTime = setInterval(() => {
@@ -22,19 +24,24 @@ const startGame = () => {
     }, 1000)
   }
 }
-const flipCard = (event) => {
-  const resetOpenCards = () => {
-    openCards.cardOne = { element: '', name: '' }
-    openCards.cardTwo = { element: '', name: '' }
-    if (board.points === NUMBER_OF_PAIRS) {
-      alert('game over')
-    }
+const playAgain = () => {
+  resetOpenCards()
+  gameOver.value = false
+}
+const resetOpenCards = () => {
+  openCards.cardOne = { element: '', name: '' }
+  openCards.cardTwo = { element: '', name: '' }
+  if (board.points === NUMBER_OF_PAIRS) {
+    gameOver.value = true
+    clearInterval(intervalTime)
   }
+}
+const flipCard = (event) => {
+  board.movements++
   const compareCards = () => {
     if (openCards.cardOne.name === openCards.cardTwo.name) {
       // Make always visible
       board.points++
-      console.log(board.points)
       resetOpenCards()
     } else {
       setTimeout(() => {
@@ -59,9 +66,5 @@ const flipCard = (event) => {
     openCards.cardTwo.name = event.target.name
     compareCards()
   }
-
-  console.log({
-    openCards
-  })
 }
-export { board, flipCard, startGame, isGameStarted }
+export { board, flipCard, startGame, isGameStarted, gameOver, userName, playAgain }
