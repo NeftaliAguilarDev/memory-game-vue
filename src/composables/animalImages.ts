@@ -29,6 +29,7 @@ export function useAnimalImages () {
   return {
     images,
     isLoading,
-    isError
+    isError,
+    NUMBER_OF_PAIRS
   }
 }
