@@ -6,7 +6,7 @@ const props = defineProps({
         default() {
             return {
                 errors: 0,
-                score: 0,
+                points: 0,
                 movements: 0,
                 time: 0,
             }
@@ -15,21 +15,21 @@ const props = defineProps({
 })
 
 const errors = computed(() => props.board.errors)
-const score = computed(() => props.board.score)
+const points = computed(() => props.board.points)
 const movements = computed(() => props.board.movements)
 const time = computed(() => props.board.time)
 
 
 </script>
 <template>
-    <div class="flex justify-between items-center">
-        <h1 class="text-3xl font-bold text-center">Memory Game</h1>
+    <div class="flex flex-col md:flex-row justify-between items-center mt-10">
+        <h1 class="text-3xl font-bold text-center text-green-modyo mb-5">Memory Game</h1>
         <div>
-            <ol>
+            <ol class="grid grid-cols-2 lg:grid-cols-4 p-5 rounded-md text-white text-center gap-5 bg-green-modyo">
                 <li>Errors: <span>{{ errors }}</span></li>
-                <li>Score: <span>{{ score }}</span></li>
+                <li>Points: <span>{{ points }}</span></li>
                 <li>Movements: <span>{{ movements }}</span></li>
-                <li>time: <span>{{ time }}</span></li>
+                <li>Time: <span>{{ time }}</span></li>
             </ol>
         </div>
     </div>

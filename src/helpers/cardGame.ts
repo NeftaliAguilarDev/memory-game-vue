@@ -1,18 +1,14 @@
-import { reactive, ref } from 'vue';
-import { useAnimalImages } from '../composables/animalImages';
+import { reactive, ref } from 'vue'
+import { useAnimalImages } from '../composables/animalImages'
 const { NUMBER_OF_PAIRS } = useAnimalImages()
 const isGameStarted = ref(false)
 const board = reactive({
   errors: 0,
   movements: 0,
-  score: 0,
+  points: 0,
   time: 0
 })
-
-const intervalTime = setInterval(() => {
-  board.time++
-}, 1000)
-
+let intervalTime = null
 const openCards = reactive({
   cardOne: { element: '', name: '' },
   cardTwo: { element: '', name: '' }
@@ -21,21 +17,24 @@ const startGame = () => {
   const userName = localStorage.getItem('username')
   if (userName) {
     isGameStarted.value = true
+    intervalTime = setInterval(() => {
+      board.time++
+    }, 1000)
   }
 }
 const flipCard = (event) => {
   const resetOpenCards = () => {
     openCards.cardOne = { element: '', name: '' }
     openCards.cardTwo = { element: '', name: '' }
-    if (board.score === NUMBER_OF_PAIRS) {
+    if (board.points === NUMBER_OF_PAIRS) {
       alert('game over')
     }
   }
   const compareCards = () => {
     if (openCards.cardOne.name === openCards.cardTwo.name) {
       // Make always visible
-      board.score++
-      console.log(board.score)
+      board.points++
+      console.log(board.points)
       resetOpenCards()
     } else {
       setTimeout(() => {
@@ -43,7 +42,7 @@ const flipCard = (event) => {
         openCards.cardOne.element.classList.remove('open')
         openCards.cardTwo.element.classList.remove('open')
         resetOpenCards()
-      }, 1000)
+      }, 600)
     }
   }
   // To avoid having 3 openCards
@@ -52,7 +51,7 @@ const flipCard = (event) => {
   if (openCards.cardOne.name === '') {
     openCards.cardOne.element = event.target.parentElement
     openCards.cardOne.name = event.target.name
-    return;
+    return
   }
 
   if (openCards.cardTwo.name === '') {
@@ -64,5 +63,5 @@ const flipCard = (event) => {
   console.log({
     openCards
   })
-};
+}
 export { board, flipCard, startGame, isGameStarted }
