@@ -1,26 +1,31 @@
 {
-  "name": "memorygame",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "pinia": "^2.1.6",
-    "vue": "^3.3.4"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^4.2.3",
-    "autoprefixer": "^10.4.14",
-    "jest": "^29.6.2",
-    "postcss": "^8.4.27",
-    "standard": "^17.1.0",
-    "tailwindcss": "^3.3.3",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.5",
-    "vue-tsc": "^1.8.5"
-  }
+    "name": "memorygame",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vue-tsc && vite build",
+        "preview": "vite preview",
+        "standard": "standard"
+    },
+    "dependencies": {
+        "pinia": "^2.1.6",
+        "vue": "^3.3.4"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^4.2.3",
+        "autoprefixer": "^10.4.14",
+        "eslint": "^8.46.0",
+        "jest": "^29.6.2",
+        "postcss": "^8.4.27",
+        "standard": "^17.1.0",
+        "tailwindcss": "^3.3.3",
+        "typescript": "^5.0.2",
+        "vite": "^4.4.5",
+        "vue-tsc": "^1.8.5"
+    },
+    "eslintConfig": {
+        "extends": "./node_modules/standard/eslinrc.json"
+    }
 }
